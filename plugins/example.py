@@ -1,21 +1,11 @@
-# -*- coding: utf-8 -*-
+from say import fmt
 
+from plugin_system import Plugin
 
-class Plugin:
-    vk = None
-	
-    plugin_type = 'command'
+plugin = Plugin("Пример плагина")
 
-    def __init__(self, vk):
-        self.vk = vk
-        print('Пример плагина')
-
-    def getkeys(self):
-        keys = [u'примерплагина', u'тестовыйплагин']
-        ret = {}
-        for key in keys:
-            ret[key] = self
-        return ret
-
-    def call(self, msg):
-        self.vk.respond(msg, {'message': u'Пример плагина'})
+# Желательно первой командой указывать основную (она будет в списке команд)
+@plugin.on_command('тестовыйплагин', 'примерплагина')
+def anynameoffunctioncanbehere(vk, raw_message, args):
+    print("OK!")
+    vk.respond(raw_message, {'message': fmt('Пример плагина (аргументы - {args})')})

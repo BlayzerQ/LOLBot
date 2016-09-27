@@ -1,31 +1,16 @@
-# -*- coding: utf-8 -*-
-
 import random
+from plugin_system import Plugin
 
+# Инициализируем возможные ответы
+greetings = []
+greetings.append('Слава Украине!')
+greetings.append('Кекеке')
+greetings.append('Запущен и готов служить!')
+greetings.append('У контакта ужасный флуд-контроль, %username%')
+greetings.append('Хуяк-хуяк и в продакшн')
 
-class Plugin:
-    vk = None
-	
-    plugin_type = 'command'
+plugin = Plugin('Приветствие')
 
-    def __init__(self, vk):
-        self.vk = vk
-        print('Приветствия')
-
-    def getkeys(self):
-        keys = [u'приветствие', 'greeting', u'привет', u'голос', u'ку']
-        ret = {}
-        for key in keys:
-            ret[key] = self
-        return ret
-
-    def call(self, msg):
-        greetings = []
-
-        greetings.append(u'Слава Украине!')
-        greetings.append(u'Кекеке')
-        greetings.append(u'Запущен и готов служить!')
-        greetings.append(u'У контакта ужасный флуд-контроль, %username%')
-        greetings.append(u'Хуяк-хуяк и в продакшен')
-
-        self.vk.respond(msg, {'message': random.choice(greetings)})
+@plugin.on_command('привет','приветствие', 'голос', 'ку')
+def call(vk, msg, args):
+    vk.respond(msg, {'message': random.choice(greetings)})

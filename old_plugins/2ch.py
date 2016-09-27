@@ -1,19 +1,21 @@
-# -*- coding: utf-8 -*-
 
 import random
+from plugin_system import Plugin
+
+plugin = Plugin("Случайное с двача")
 
 
 class Plugin:
     vk = None
-	
+
     plugin_type = 'command'
 
     def __init__(self, vk):
         self.vk = vk
-        print('Случайные мемасики')
+        print('Случайное с двача')
 
     def getkeys(self):
-        keys = [u'мемасики', u'мемы', u'memes', u'мем', u'мемчики', u'мемасик', u'мемосы']
+        keys = ['двач', '2ch', 'двачик', 'дваче']
         ret = {}
         for key in keys:
             ret[key] = self
@@ -21,17 +23,18 @@ class Plugin:
 
     def call(self, msg):
         answers = []
-        answers.append(u"Мемы поданы!")
-        answers.append(u"Классный мемес!")
-        answers.append(u"Знакомься, мемасик")
+        answers.append("Каеф")
+        answers.append("Не баян (баян)")
+        answers.append("Ну держи!")
+        answers.append("&#127770;")
 
         isphoto = False
         boobs = None
 
         while isphoto is False:
             values = {
-            # owner_id = ид группы
-                'owner_id': -87960594,
+                # owner_id = ид группы
+                'owner_id': -22751485,
                 'offset': random.randint(1, 1985),
                 'count': 1
             }
@@ -49,7 +52,7 @@ class Plugin:
 
         attachment = 'photo' + owner_id + '_' + att_id + '_' + access_key
 
-        print attachment
+        print(attachment)
 
         self.vk.respond(msg, {'message': random.choice(answers),
-            'attachment': attachment})
+                              'attachment': attachment})

@@ -1,19 +1,16 @@
-# -*- coding: utf-8 -*-
-
 import random
 
 
 class Plugin:
     vk = None
-	
     plugin_type = 'command'
 
     def __init__(self, vk):
         self.vk = vk
-        print('Случайные сиськи')
+        print('Случайные школьницы')
 
     def getkeys(self):
-        keys = [u'сиськи', u'boobs']
+        keys = ['шк', 'sh', 'shkey', 'школьницы', 'школьница']
         ret = {}
         for key in keys:
             ret[key] = self
@@ -21,18 +18,20 @@ class Plugin:
 
     def call(self, msg):
         answers = []
-        answers.append(u"Сиськи поданы!")
-        answers.append(u"Случайные сиськи!")
-        answers.append(u"Знакомься, сиськи")
+        answers.append("Я тут выбрал, посмотрите.")
+        answers.append("Баллов на " + str(random.randint(1, 8)) + " из 10")
+        answers.append("Вот, держи!")
+        answers.append("Не знаю как вам, а мне понравилась.")
+        answers.append("&#127770;")
 
         isphoto = False
         boobs = None
 
         while isphoto is False:
             values = {
-            # owner_id = ид группы
-                'owner_id': -20282193,
-                'offset': random.randint(1, 500),
+                # owner_id = ид группы
+                'owner_id': -114802962,
+                'offset': random.randint(1, 1800),
                 'count': 1
             }
 
@@ -49,7 +48,7 @@ class Plugin:
 
         attachment = 'photo' + owner_id + '_' + att_id + '_' + access_key
 
-        print attachment
+        print(attachment)
 
         self.vk.respond(msg, {'message': random.choice(answers),
-            'attachment': attachment})
+                              'attachment': attachment})

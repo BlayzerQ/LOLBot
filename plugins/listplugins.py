@@ -1,32 +1,11 @@
-# -*- coding: utf-8 -*-
-
-import os
-import sys
+from plugin_system import Plugin
 
 
-class Plugin:
-    vk = None
-	
-    plugin_type = 'command'
+plugin = Plugin('Список плагинов')
 
-    def __init__(self, vk):
-        self.vk = vk
-        print('Список плагинов')
 
-    def getkeys(self):
-        keys = [u'плагины', 'plugins']
-        ret = {}
-        for key in keys:
-            ret[key] = self
-        return ret
-
-    def call(self, msg):
-        lists = ''
-        path = 'plugins/'
-        sys.path.insert(0, path)
-        for f in os.listdir(path):
-            fname, ext = os.path.splitext(f)
-            if ext == '.py':
-                lists += fname + ' '
-        sys.path.pop(0)
-        self.vk.respond(msg, {'message': u'Загруженные плагины:\n' + lists})
+@plugin.on_command('плагины')
+def call(vk, msg, args):
+    vk.respond(msg, {'message': 'Загруженные плагины:\n' +
+                                ', '.join(plugin.name for plugin in vk.get_plugins())
+                    })
